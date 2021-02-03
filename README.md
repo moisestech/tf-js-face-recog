@@ -2,6 +2,12 @@
 
 Tensorflow.js Face Recognition
 
+## Features
+
+1. Tensorflow.JS facemesh model
+2. React.JS face landmark detection app
+3. Real-time webcam Landmark Face Detection
+
 ## To-Do's
 
 1. Finnish Webpack Config
