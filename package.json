@@ -2,24 +2,37 @@
   "name": "tf-js-face-recog",
   "version": "1.0.0",
   "description": "tf-js-face-recog",
-  "main": "index.js",
+  "main": "webpack.config.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"No test specified\""
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/moisestech/tf-js-face-recog.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "tensorflowjs",
+    "Face Recognition",
+    "AI Landmarks",
+    "Face Mesh",
+    "reactjs",
+    "canvas"
+  ],
+  "author": "Moises Sanabria",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/moisestech/tf-js-face-recog/issues"
   },
   "homepage": "https://github.com/moisestech/tf-js-face-recog#readme",
   "devDependencies": {
-    "webpack": "^5.19.0",
-    "webpack-cli": "^4.4.0",
     "webpack-dev-server": "^3.11.2"
+  },
+  "dependencies": {
+    "css-loader": "^5.0.1",
+    "file": "^0.2.2",
+    "react-dom": "^17.0.1",
+    "style-loader": "^2.0.0",
+    "webpack": "^5.20.0",
+    "webpack-cli": "^4.5.0"
   }
 }
