@@ -25,6 +25,9 @@
   },
   "homepage": "https://github.com/moisestech/tf-js-face-recog#readme",
   "devDependencies": {
+    "@babel/core": "^7.12.13",
+    "@babel/plugin-transform-runtime": "^7.12.15",
+    "@babel/preset-env": "^7.12.13",
     "webpack-dev-server": "^3.11.2"
   },
   "dependencies": {
