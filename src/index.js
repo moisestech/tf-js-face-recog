@@ -21,6 +21,8 @@ import * as facemesh from "@tensorflow-models/face-landmarks-detection";
 import Webcam from "react-webcam";
 import { drawMesh } from "./utilities";
 
+// https://github.com/nicknochnack/FacialLandmarkDetection
+
 let project_name = "Tensorflow.js Face Recognition";
 
 console.log({project_name});
