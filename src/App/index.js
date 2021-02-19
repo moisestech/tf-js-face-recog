@@ -20,7 +20,7 @@ import * as tf from "@tensorflow/tfjs";
 import * as facemesh from "@tensorflow-models/face-landmarks-detection";
 
 // drawings x, y points on canvas
-import { drawMesh } from "./utils";
+import { drawMesh } from "../utils";
 
 export default function App() {
   let project_name = "Tensorflow.js Face Recognition";
