@@ -2,11 +2,28 @@
 
 ## **1.** Install dependencies
 
+- Install Tensorflow Model [Face Landmarks Detection](https://www.npmjs.com/package/@tensorflow-models/face-landmarks-detection).
+- Full list of dependencies and devDependencies in [package.json]().
+
 ## **2.** Import dependencies
+
+- App/index.js
+  - `import * as facemesh` and `import * as tf`.
+  - `import {useRef} from 'react'`. [useRef link](https://reactjs.org/docs/hooks-reference.html#useref)
+    - help us reference our onscreen in DOM elements that keep state during the component lifecycle.
 
 ## **3.** Setup webcam and canvas
 
+- App/index.js in `<header />` DOM element.
+  - `<Webcam className="react-webcam"/>` return webcam component.
+  - `<Canvas className="react-canvas" />` return canvas component.
+
 ## **4.** Define references to those
+
+- App/index.js in `App()` component body.
+  - connect canvas and webcam components with `useRef`.
+  - `const webcamRef = useRef(null);`
+  - `const camvasRef = useRef(null);`
 
 ## **5.** Load facemesh
 
