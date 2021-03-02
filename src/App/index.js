@@ -27,6 +27,13 @@ export default function App({project_name = "Tensorflow.js Face Recognition"}) {
   const webCamRef = useRef(null);
   const canvasRef = useRef(null);
 
+  // Load facemesh model
+  const runFacemesh = async () => {
+    const net = await facemesh.load({
+      inputResolution: {width: 640, height: 480, scale: 0.8}
+    })
+  };
+
   return (  
     <div clasName="App">
       <h1>{project_name}</h1>
