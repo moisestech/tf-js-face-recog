@@ -56,12 +56,16 @@ const runFacemesh = async () => {
 
   iv. Width const **`video, videoWidth, videoHeight`** the width and height of the **`webcamRef`** and **`canvasRef`** are set.
 
+  v. async **`net.estimateFaces(video)`** is stored in **`face`** const which returns an **array** of **objects**.
+
   ```javascript
+  // after runFacemesh async function
   const detect = async (net) => {
+    // checking data is streaming
     if (
       typeof webcamRef.current !== "undefined" && 
       webcamRef.current !== null && 
-      webcamRef.current.video.readState === 4 
+      webcamRef.current.video.readyState === 4 
     ) {
       // Get Video properties
       const video = webcamRef.current.video;
@@ -77,6 +81,9 @@ const runFacemesh = async () => {
       canvasRef.current.height = videoHeight;
 
       // Make Detections
+      const face = await net.estimateFaces(video);
+      console.log(face);
+
       // Get Canvas context for drawing
     }
   }
