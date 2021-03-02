@@ -41,12 +41,28 @@ const camvasRef = useRef(null);
 // after useRef initializations in App () comp
 const runFacemesh = async () => {
   const net = await facemesh.load({
-    inputResolution: {width: 640, height: 480, scale: 0.8
+    inputResolution: {width: 640, height: 480}, scale: 0.8
   });
 }
 ```
 
 ## **6.** Detect function
+
+  i. async function **`detect`** runs when the app starts, goes ahead and detects our model and our webcam.
+
+  ii. **`if`** statement will check the **`webcamRef`** is defined with a **`readState`** of 4.
+
+  ```javascript
+  const detect = async (net) => {
+    if (
+      typeof webcamRef.current !== "undefined" && 
+      webcamRef.current !== null && 
+      webcamRef.current.video.readState === 4 
+    ) {
+
+    }
+  }
+  ```
 
 ## **7.** Drawing utilities
 
