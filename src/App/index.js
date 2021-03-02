@@ -30,9 +30,20 @@ export default function App({project_name = "Tensorflow.js Face Recognition"}) {
   // Load facemesh model
   const runFacemesh = async () => {
     const net = await facemesh.load({
-      inputResolution: {width: 640, height: 480, scale: 0.8}
+      inputResolution: {width: 640, height: 480}, scale: 0.8
     })
   };
+
+  // Detect function
+  const detect = async (net) => {
+    if (
+      typeof webcamRef.current !== "undefined" && 
+      webcamRef.current !== null && 
+      webcamRef.current.video.readState === 4 
+    ) {
+
+    }
+  }
 
   return (  
     <div clasName="App">
