@@ -22,10 +22,26 @@
 
 - App/index.js in `App()` component body.
   - connect canvas and webcam components with `useRef`.
-  - `const webcamRef = useRef(null);`
-  - `const camvasRef = useRef(null);`
+
+```javascript
+const webcamRef = useRef(null);
+const camvasRef = useRef(null);
+```
 
 ## **5.** Load facemesh
+
+- async function **`runFacemesh`** will perform face detections from our webcam.
+- **`facemesh.load`** that takes an object with parameters **`inputResolution: {width, height, scale}`**
+- scaling the size of the resolution so it performs a bit faster.
+
+```javascript
+// after useRef initializations in App () comp
+const runFacemesh = async () => {
+  const net = await facemesh.load({
+    inputResolution: {width: 640, height: 480, scale: 0.8
+  });
+}
+```
 
 ## **6.** Detect function
 
