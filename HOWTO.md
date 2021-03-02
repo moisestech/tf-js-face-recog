@@ -8,15 +8,18 @@
 ## **2.** Import dependencies
 
 - App/index.js
-  - `import * as facemesh` and `import * as tf`.
-  - `import {useRef} from 'react'`. [useRef link](https://reactjs.org/docs/hooks-reference.html#useref)
+  - **`import * as facemesh`** and **`import * as tf`**.
+  - **`import {useRef} from 'react'`**. [useRef link](https://reactjs.org/docs/hooks-reference.html#useref)
     - help us reference our onscreen in DOM elements that keep state during the component lifecycle.
 
 ## **3.** Setup webcam and canvas
 
-- App/index.js in `<header />` DOM element.
-  - `<Webcam className="react-webcam"/>` return webcam component.
-  - `<Canvas className="react-canvas" />` return canvas component.
+- App/index.js in `<header />` DOM element **`Webcam`** and **`Canvas`** components are initialized.
+
+```javascript
+<Webcam className="react-webcam"/>
+<Canvas className="react-canvas" />
+```
 
 ## **4.** Define references to those
 
