@@ -52,6 +52,8 @@ const runFacemesh = async () => {
 
   ii. **`if`** statement will check the **`webcamRef`** is defined with a **`readState`** of 4.
 
+  iii. Once **`webcamRef`** is ready, the const **`video`**, **`videoWidth`**, and **`videoHeight`** are defined from **`current.video`**.
+
   ```javascript
   const detect = async (net) => {
     if (
@@ -59,7 +61,15 @@ const runFacemesh = async () => {
       webcamRef.current !== null && 
       webcamRef.current.video.readState === 4 
     ) {
-
+      // Get Video properties
+      const video = webcamRef.current.video;
+      const videoWidth = webcamRef.current.video.videoWidth;
+      const videoHeight = webcamRef.current.video.videoHeight;
+      
+      // Set Video Width
+      // Set Canvas Width
+      // Make Detections
+      // Get Canvas context for drawing
     }
   }
   ```
