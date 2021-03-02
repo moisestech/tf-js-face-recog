@@ -39,7 +39,7 @@ export default function App({project_name = "Tensorflow.js Face Recognition"}) {
     if (
       typeof webcamRef.current !== "undefined" && 
       webcamRef.current !== null && 
-      webcamRef.current.video.readState === 4 
+      webcamRef.current.video.readyState === 4 
     ) {
       // Get Video properties
       const video = webcamRef.current.video;
@@ -53,6 +53,10 @@ export default function App({project_name = "Tensorflow.js Face Recognition"}) {
       // Set Canvas Width
       canvasRef.current.width = videoWidth;
       canvasRef.current.height = videoHeight;
+
+      // Make Detections
+      const face = await net.estimateFaces(video);
+      console.log(faces);
     }
   }
 
