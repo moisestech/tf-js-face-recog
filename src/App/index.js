@@ -45,6 +45,14 @@ export default function App({project_name = "Tensorflow.js Face Recognition"}) {
       const video = webcamRef.current.video;
       const videoWidth = webcamRef.current.video.videoWidth;
       const videoHeight = webcamRef.current.video.videoHeight;
+
+      // Set Video Width
+      webcamRef.current.video.width = videoWidth;
+      webcamRef.current.video.height = videoHeight;
+
+      // Set Canvas Width
+      canvasRef.current.width = videoWidth;
+      canvasRef.current.height = videoHeight;
     }
   }
 
