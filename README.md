@@ -23,7 +23,7 @@ To start app: `npm start`
 
 ## 📚 HOW-TO
 
-For additional info click [here]()
+For additional info click [here](https://github.com/moisestech/tf-js-face-recog/blob/main/HOWTO.md)
 
 ## 🗺 URL Tree
 
