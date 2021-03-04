@@ -147,7 +147,7 @@ const runFacemesh = async () => {
   drawMesh(face, ctx);
   ```
 
-## **12.** Connect drawMesh function to model detect function
+## **12.** Setup Drawing Utility: **drawMesh()**
 
   i. In **utilities/index.js** the new function **`drawPath`** with parameters **`cts, points, closePath`**.
 
@@ -164,7 +164,7 @@ const runFacemesh = async () => {
     if (closePath) {
       region.closePath();
     }
-    ctx.strokeStyle="pink";
+    ctx.strokeStyle="cyan";
     ctx.stoke(region);
   }
   ```
