@@ -2653,27 +2653,29 @@ const drawPath = (ctx, points, closePath) => {
   if (closePath) {
     region.closePath();
   }
-  ctx.strokeStyle="cyan";
+  ctx.strokeStyle="aqua";
   ctx.stoke(region);
 }
 
 // Point mesh drawing method
 export const drawMesh = (predictions, ctx) => {
   if (predictions.length > 0) {
-    // Draw triangles
-    for (let i=0; i < TRIANGULATION.length/3; i++) {
-      const points = [
-        TRIANGULATION[i * 3],
-        TRIANGULATION[i * 3 + 1],
-        TRIANGULATION[i * 3 + 2],
-      ].map((index) => keypoints[index]);
 
-      drawPath(ctx, points, true);
-    }
-
-    // Draw Points
+    // Loops to draw
     predictions.forEach(prediction => {
       const keypoints = prediction.scaledMesh;
+
+      // Draw Triangles
+      for (let i=0; i < TRIANGULATION.length/3; i++) {
+        const points = [
+          TRIANGULATION[i * 3],
+          TRIANGULATION[i * 3 + 1],
+          TRIANGULATION[i * 3 + 2],
+        ].map((index) => keypoints[index]);
+        drawPath(ctx, points, true);
+      }
+
+      // Draw Points
       for (let i = 0; i < keypoints.length; i++) {
         const x = keypoints[i][0];
         const y = keypoints[i][1];
