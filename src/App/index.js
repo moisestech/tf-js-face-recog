@@ -57,6 +57,10 @@ export default function App({project_name = "Tensorflow.js Face Recognition"}) {
       // Make Detections
       const face = await net.estimateFaces(video);
       console.log(faces);
+
+      // Get canvas context for drawing
+      const ctx = canvasRef.current.getContext("2d");
+      drawMesh(face, ctx);
     }
   }
 
