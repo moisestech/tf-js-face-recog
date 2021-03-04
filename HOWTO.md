@@ -48,15 +48,17 @@ const runFacemesh = async () => {
 
 ## **6.** Detect function
 
-  i. async function **`detect`** runs when the app starts, goes ahead and detects our model and our webcam.
+  **i.** async function **`detect`** runs when the app starts, goes ahead and detects our model and our webcam.
 
-  ii. **`if`** statement will check the **`webcamRef`** is defined with a **`readState`** of 4.
+  **ii.** **`if`** statement will check the **`webcamRef`** is defined with a **`readState`** of 4.
 
-  iii. Once **`webcamRef`** is ready, the const **`video`**, **`videoWidth`**, and **`videoHeight`** are defined from **`webcamRef.current.video`**.
+  **iii.** Once **`webcamRef`** is ready, the const **`video`**, **`videoWidth`**, and **`videoHeight`** are defined from **`webcamRef.current.video`**.
 
-  iv. Width const **`video, videoWidth, videoHeight`** the width and height of the **`webcamRef`** and **`canvasRef`** are set.
+  **iv.** Width const **`video, videoWidth, videoHeight`** the width and height of the **`webcamRef`** and **`canvasRef`** are set.
 
-  v. async **`net.estimateFaces(video)`** is stored in **`face`** const which returns an **array** of **objects**.
+  **v.** async **`net.estimateFaces(video)`** is stored in **`face`** const which returns an **array** of **objects**.
+
+  The returned objects include a **`scaledMesh`** for the face that returns an **`x, y, z`** coordinate for **3D Detection**.
 
   ```javascript
   // after runFacemesh async function
@@ -90,6 +92,12 @@ const runFacemesh = async () => {
   ```
 
 ## **7.** Drawing utilities
+
+  i. Create a new file utilities JS **`utils/index.js`** and store the array of points from the mesh that create triangles.
+
+  ```javascript
+  export const TRIANGULATION = [...];
+  ```
 
 ## **8.** Load triangulation
 
