@@ -74,5 +74,5 @@ export default function App({project_name = "Tensorflow.js Face Recognition"}) {
   )
 }
 
-// video: https://www.youtube.com/watch?v=7lXYGDVHUNw
+// video: https://youtu.be/7lXYGDVHUNw?t=965
 // code: https://github.com/nicknochnack/FacialLandmarkDetection
