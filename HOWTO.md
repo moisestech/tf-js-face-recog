@@ -108,6 +108,8 @@ const runFacemesh = async () => {
   ```javascript
   export const drawMesh = (predictions, ctx) => {
     if (predictions.length > 0) {
+
+      // Draw Points
       predictions.forEach(prediction => {
         const keypoints = prediction.scaledMesh;
         for (let i = 0; i < keypoints.length; i++) {
@@ -147,7 +149,7 @@ const runFacemesh = async () => {
   drawMesh(face, ctx);
   ```
 
-## **12.** Setup Drawing Utility: **drawMesh()**
+## **12.** Setup Drawing Utility: **drawPath()**
 
   i. In **utilities/index.js** the new function **`drawPath`** with parameters **`cts, points, closePath`**.
 
@@ -168,6 +170,27 @@ const runFacemesh = async () => {
     ctx.stoke(region);
   }
   ```
+
+## **13.** Upgrade **drawMesh()** Utility with Draw Triangles
+
+  i. Passing through the TRIANGULATION metric dividing it by three and mapping it to specific points.
+
+  ii. After, function **drawPath()** is invoked which requires the parameters **`ctx, points, true`**. The last param is require to show wether or not to show the path.
+
+```javascript
+// inside the drawPath function
+
+// Draw triangles
+for (let i=0; i < TRIANGULATION.length/3; i++) {
+  const points = [
+    TRIANGULATION[i * 3],
+    TRIANGULATION[i * 3 + 1],
+    TRIANGULATION[i * 3 + 2],
+  ].map((index) => keypoints[index]);
+
+  drawPath(ctx, points, true);
+}
+```
 
 ---
 
