@@ -91,12 +91,44 @@ const runFacemesh = async () => {
   }
   ```
 
-## **7.** Drawing utilities
+## **7.** Setup initial Drawing utilities
 
   i. Create a new file utilities JS **`utils/index.js`** and store the array of points from the mesh that create triangles.
 
   ```javascript
   export const TRIANGULATION = [...];
+  ```
+
+  ii. Arrow function **`drawMesh`** with parameters **`predictions, ctx`** will loop through the **model prediction** and draw them on the canvas.
+
+  ```javascript
+  export const drawMesh = (predictions, ctx) => {
+    if (predictions.length > 0) {
+      predictions.forEach(prediction => {
+        const keypoints = prediction.scaledMesh;
+        for (let i = 0; i < keypoints.length; i++) {
+          const x = keypoints[i][0];
+          const y = keypoints[i][1];
+
+          ctx.beginPath();
+          ctx.arc(x, y, 1, 0, 3 * Math.PI);
+          ctx.fillStyle = "aqua";
+          ctx.fill();
+        }
+      })
+    }
+  }
+  ```
+
+## **8.** Connect Drawing utility to drawMesh function
+
+  i. Import the **`drawMesh`** function **`utilities/index.js`**.
+
+  ```javascript
+  // after import facemesh model
+
+  // drawings x, y points on canvas
+import { drawMesh } from "../utils";
   ```
 
 ## **8.** Load triangulation
