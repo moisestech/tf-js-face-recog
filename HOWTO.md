@@ -101,6 +101,8 @@ const runFacemesh = async () => {
 
   ii. Arrow function **`drawMesh`** with parameters **`predictions, ctx`** will loop through the **model prediction** and draw them on the canvas.
 
+  The **`predictions.scaledMesh`** keypoints are stored and used to draw in the canvas using **`ctx.arc`**.
+
   ```javascript
   export const drawMesh = (predictions, ctx) => {
     if (predictions.length > 0) {
@@ -129,6 +131,16 @@ const runFacemesh = async () => {
 
   // drawings x, y points on canvas
 import { drawMesh } from "../utils";
+  ```
+
+  ii. Inside the detect function **`canvasRef`** is stored in const **`ctx`** and utils function **`drawMesh`** is invoked with **`face`** estimateFaces **object** and **`ctx`**.
+
+  ```javascript
+  // inside detect function make detections
+
+  // Get canvas context for drawing
+  const ctx = canvasRef.current.getContext("2d");
+  drawMesh(face, ctx);
   ```
 
 ## **8.** Load triangulation
