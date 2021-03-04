@@ -91,7 +91,7 @@ const runFacemesh = async () => {
   }
   ```
 
-## **7.** Setup initial Drawing utilities
+## **8.** Setup Drawing Utility: Triangulation Data
 
   i. Create a new file utilities JS **`utils/index.js`** and store the array of points from the mesh that create triangles.
 
@@ -99,9 +99,11 @@ const runFacemesh = async () => {
   export const TRIANGULATION = [...];
   ```
 
-  ii. Arrow function **`drawMesh`** with parameters **`predictions, ctx`** will loop through the **model prediction** and draw them on the canvas.
+## **9.** Setup Drawing Utility: **drawMesh()**
 
-  The **`predictions.scaledMesh`** keypoints are stored and used to draw in the canvas using **`ctx.arc`**.
+  i. Arrow function **`drawMesh`** with parameters **`predictions, ctx`** will loop through the **model prediction** and draw them on the canvas.
+
+  ii. The **`predictions.scaledMesh`** keypoints are stored and used to draw in the canvas using **`ctx.arc`**.
 
   ```javascript
   export const drawMesh = (predictions, ctx) => {
@@ -122,16 +124,18 @@ const runFacemesh = async () => {
   }
   ```
 
-## **8.** Connect Drawing utility to drawMesh function
+## **10.** Import Utility drawMesh to App
 
-  i. Import the **`drawMesh`** function **`utilities/index.js`**.
+  i. In **`src/App/index.js`** import the function **`drawMesh`** from **`utilities/index.js`**.
 
   ```javascript
   // after import facemesh model
 
   // drawings x, y points on canvas
-import { drawMesh } from "../utils";
+  import { drawMesh } from "../utils";
   ```
+
+## **11.** Connect drawMesh function to model detect function
 
   ii. Inside the detect function **`canvasRef`** is stored in const **`ctx`** and utils function **`drawMesh`** is invoked with **`face`** estimateFaces **object** and **`ctx`**.
 
@@ -143,13 +147,27 @@ import { drawMesh } from "../utils";
   drawMesh(face, ctx);
   ```
 
-## **8.** Load triangulation
+## **12.** Connect drawMesh function to model detect function
 
-## **9.** Setup triangle path
+  i. In **utilities/index.js** the new function **`drawPath`** with parameters **`cts, points, closePath`**.
 
-## **10.** Setup point drawing
+  ii. The function initiates a new path, draws the points and then closes the path forming a entire triangle. After, **`strokeStyle`** is set and **`region`** is passed to **`ctx.stroke(region)`**.
 
-## **11.** Add drawMesh to detect function
+  ```javascript
+  const drawPath = (ctx, points, closePath) => {
+    const region = new Path2D();
+    region.moveTo(points[0][1]);
+    for (let i=1; i < points.length; i++) {
+      const point = points[i];
+      region.lineTo(point[0], point[1]);
+    }
+    if (closePath) {
+      region.closePath();
+    }
+    ctx.strokeStyle="pink";
+    ctx.stoke(region);
+  }
+  ```
 
 ---
 
