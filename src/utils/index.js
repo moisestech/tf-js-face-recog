@@ -2660,6 +2660,18 @@ const drawPath = (ctx, points, closePath) => {
 // Point mesh drawing method
 export const drawMesh = (predictions, ctx) => {
   if (predictions.length > 0) {
+    // Draw triangles
+    for (let i=0; i < TRIANGULATION.length/3; i++) {
+      const points = [
+        TRIANGULATION[i * 3],
+        TRIANGULATION[i * 3 + 1],
+        TRIANGULATION[i * 3 + 2],
+      ].map((index) => keypoints[index]);
+
+      drawPath(ctx, points, true);
+    }
+
+    // Draw Points
     predictions.forEach(prediction => {
       const keypoints = prediction.scaledMesh;
       for (let i = 0; i < keypoints.length; i++) {
