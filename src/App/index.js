@@ -22,7 +22,7 @@ import * as facemesh from "@tensorflow-models/face-landmarks-detection";
 // drawings x, y points on canvas
 import { drawMesh } from "../utils";
 
-export default function App({project_name = "Tensorflow.js Face Recognition"}) {
+export default function App() {
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
 
@@ -69,7 +69,7 @@ export default function App({project_name = "Tensorflow.js Face Recognition"}) {
 
   return (  
     <div className="App">
-      <h1>{project_name}</h1>
+      <h1>Tensorflow.js Face Recognition</h1>
       <header>
         {/* where one intakes data for tfjs  */}
         <Webcam ref={webcamRef} className="react-webcam" />
@@ -80,6 +80,3 @@ export default function App({project_name = "Tensorflow.js Face Recognition"}) {
     </div>
   )
 }
-
-// video: https://youtu.be/7lXYGDVHUNw?t=965
-// code: https://github.com/nicknochnack/FacialLandmarkDetection
