@@ -139,7 +139,7 @@ const runFacemesh = async () => {
 
 ## **11.** Connect drawMesh function to model detect function
 
-  ii. Inside the detect function **`canvasRef`** is stored in const **`ctx`** and utils function **`drawMesh`** is invoked with **`face`** estimateFaces **object** and **`ctx`**.
+  **ii.** Inside the detect function **`canvasRef`** is stored in const **`ctx`** and utils function **`drawMesh`** is invoked with **`face`** estimateFaces **object** and **`ctx`**.
 
   ```javascript
   // inside detect function make detections
@@ -151,9 +151,9 @@ const runFacemesh = async () => {
 
 ## **12.** Setup Drawing Utility: **drawPath()**
 
-  i. In **utilities/index.js** the new function **`drawPath`** with parameters **`cts, points, closePath`**.
+  **i.** In **utilities/index.js** the new function **`drawPath`** with parameters **`cts, points, closePath`**.
 
-  ii. The function initiates a new path, draws the points and then closes the path forming a entire triangle. After, **`strokeStyle`** is set and **`region`** is passed to **`ctx.stroke(region)`**.
+  **ii.** The function initiates a new path, draws the points and then closes the path forming a entire triangle. After, **`strokeStyle`** is set and **`region`** is passed to **`ctx.stroke(region)`**.
 
   ```javascript
   const drawPath = (ctx, points, closePath) => {
@@ -173,9 +173,9 @@ const runFacemesh = async () => {
 
 ## **13.** Upgrade **drawMesh()** Utility with Draw Triangles
 
-  i. Passing through the TRIANGULATION metric dividing it by three and mapping it to specific points.
+  **i.** Passing through the TRIANGULATION metric dividing it by three and mapping it to specific points.
 
-  ii. After, function **drawPath()** is invoked which requires the parameters **`ctx, points, true`**. The last param is require to show wether or not to show the path.
+  **ii.** After, function **drawPath()** is invoked which requires the parameters **`ctx, points, true`**. The last param is require to show wether or not to show the path.
 
 ```javascript
 // inside the drawPath function
