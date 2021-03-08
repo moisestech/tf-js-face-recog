@@ -2,6 +2,8 @@
 
 ## **Interactive Face Recognition!**
 
+![Facemesh Logo](https://raw.githubusercontent.com/moisestech/tf-js-face-recog/main/public/assets/facemesh_logo.png)
+
 ## ⚙ Features
 
 - [React 17](https://reactjs.org/blog/2020/10/20/react-v17.html)
@@ -15,7 +17,7 @@
 
 ## 👁️‍🗨️ Project Preview
 
-Coming Soon!
+![Facemesh App Demo](https://github.com/moisestech/tf-js-face-recog/blob/main/public/assets/facemesh_running_demo.gif?raw=true)
 
 ## 🚀 Start
 
