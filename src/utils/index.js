@@ -2645,7 +2645,7 @@ export const TRIANGULATION = [
 // Triangle drawing method
 const drawPath = (ctx, points, closePath) => {
   const region = new Path2D();
-  region.moveTo(points[0][1]);
+  region.moveTo(points[0][0], points[0][1]);
   for (let i=1; i < points.length; i++) {
     const point = points[i];
     region.lineTo(point[0], point[1]);
@@ -2654,7 +2654,7 @@ const drawPath = (ctx, points, closePath) => {
     region.closePath();
   }
   ctx.strokeStyle="aqua";
-  ctx.stoke(region);
+  ctx.stroke(region);
 }
 
 // Point mesh drawing method
@@ -2662,7 +2662,7 @@ export const drawMesh = (predictions, ctx) => {
   if (predictions.length > 0) {
 
     // Loops to draw
-    predictions.forEach(prediction => {
+    predictions.forEach((prediction) => {
       const keypoints = prediction.scaledMesh;
 
       // Draw Triangles
@@ -2672,6 +2672,8 @@ export const drawMesh = (predictions, ctx) => {
           TRIANGULATION[i * 3 + 1],
           TRIANGULATION[i * 3 + 2],
         ].map((index) => keypoints[index]);
+
+        // Draw Triangle
         drawPath(ctx, points, true);
       }
 
@@ -2681,10 +2683,10 @@ export const drawMesh = (predictions, ctx) => {
         const y = keypoints[i][1];
 
         ctx.beginPath();
-        ctx.arc(x, y, 1, 0, 3 * Math.PI);
+        ctx.arc(x, y, 1 /* radius */, 0, 3 * Math.PI);
         ctx.fillStyle = "aqua";
         ctx.fill();
       }
-    })
+    });
   }
-}
+};
