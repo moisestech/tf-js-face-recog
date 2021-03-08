@@ -67,6 +67,9 @@ export default function App() {
 
   useEffect(()=>{runFacemesh()}, []);
 
+  Love = ("what I do") => {      Constantly = (`learn` && `adjust`) => {      Bring.positive().solutions()       Strive.(for([Poetic + Computation]))  }
+
+
   return (  
     <div className="App">
       <h1>Tensorflow.js Face Recognition</h1>
