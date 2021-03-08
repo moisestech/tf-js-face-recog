@@ -63,14 +63,11 @@ For additional info click [here](https://github.com/moisestech/tf-js-face-recog/
 
 ## To-Do's
 
-1. Finnish Webpack Config
-2. Finnish Tutorial
-3. Finnish README.md page
-4. Finnish HOWTO.md page
-5. Add Logo
-6. Add WebApp Preview Gif
-7. Add File Diagram
-8. Add Babel Compilation
+1. Upload to Netlify
+2. Update HOWTO.md page
+3. Add Logo
+4. Add WebApp Preview Gif
+5. Add File Diagram
 
 ---
 [Moises Sanabria](https://www.moises.tech/)
