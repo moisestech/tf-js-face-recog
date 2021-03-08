@@ -2,7 +2,7 @@
 
 ## **Interactive Face Recognition!**
 
-![Facemesh Logo](https://raw.githubusercontent.com/moisestech/tf-js-face-recog/main/public/assets/facemesh_logo.png)
+<img src="https://raw.githubusercontent.com/moisestech/tf-js-face-recog/main/public/assets/facemesh_logo.png" width="150px"/>
 
 ## ⚙ Features
 
