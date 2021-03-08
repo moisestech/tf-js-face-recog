@@ -15,12 +15,12 @@ code {
 /* React Webcam */
 
 .react-webcam {
-  position: "absolute";
-  margin-left: "auto";
-  margin-right: "auto";
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
   left: 0;
   right: 0;
-  text-align: "center";
+  text-align: center;
   z-index: 9;
   width: 640px;
   height: 480px;
@@ -29,12 +29,12 @@ code {
 /* Canvas */
 
 .react-canvas {
-  position: "absolute";
-  margin-left: "auto";
-  margin-right: "auto";
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
   left: 0;
   right: 0;
-  text-align: "center";
+  text-align: center;
   z-index: 9;
   width: 640px;
   height: 480px;
