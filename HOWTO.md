@@ -3,7 +3,7 @@
 ## **1.** Install dependencies
 
 - Install Tensorflow Model [Face Landmarks Detection](https://www.npmjs.com/package/@tensorflow-models/face-landmarks-detection).
-- Full list of dependencies and devDependencies in [package.json]().
+- Full list of dependencies and devDependencies in [package.json](https://github.com/moisestech/tf-js-face-recog/blob/main/package.json).
 
 ## **2.** Import dependencies
 
