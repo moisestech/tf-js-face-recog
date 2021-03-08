@@ -23,15 +23,16 @@ import * as facemesh from "@tensorflow-models/face-landmarks-detection";
 import { drawMesh } from "../utils";
 
 export default function App({project_name = "Tensorflow.js Face Recognition"}) {
-
-  const webCamRef = useRef(null);
+  const webcamRef = useRef(null);
   const canvasRef = useRef(null);
 
   // Load facemesh model
   const runFacemesh = async () => {
-    const net = await facemesh.load({
-      inputResolution: {width: 640, height: 480}, scale: 0.8
-    })
+    //
+    const net = await facemesh.load(facemesh.SupportedPackages.mediapipeFacemesh);
+    setInterval(() => {
+      detect(net);
+    }, 10);
   };
 
   // Detect function
@@ -55,24 +56,26 @@ export default function App({project_name = "Tensorflow.js Face Recognition"}) {
       canvasRef.current.height = videoHeight;
 
       // Make Detections
-      const face = await net.estimateFaces(video);
-      console.log(faces);
+      const face = await net.estimateFaces({input:video});
+      console.log(face);
 
       // Get canvas context for drawing
       const ctx = canvasRef.current.getContext("2d");
-      drawMesh(face, ctx);
+      requestAnimationFrame(()=>{drawMesh(face, ctx)});
     }
   }
 
+  useEffect(()=>{runFacemesh()}, []);
+
   return (  
-    <div clasName="App">
+    <div className="App">
       <h1>{project_name}</h1>
       <header>
         {/* where one intakes data for tfjs  */}
         <Webcam ref={webcamRef} className="react-webcam" />
 
         {/* where one draws the segmentation layer */}
-        <Canvas ref={canvasRef} className="react-canvas" />
+        <canvas ref={canvasRef} className="react-canvas" />
       </header>
     </div>
   )
