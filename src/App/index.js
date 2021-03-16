@@ -10,7 +10,7 @@
 // 10. Setup point drawing
 // 11. Add drawMesh to detect function
 
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 
 // access to webcam
 import Webcam from "react-webcam";
@@ -23,8 +23,25 @@ import * as facemesh from "@tensorflow-models/face-landmarks-detection";
 import { drawMesh } from "../utils";
 
 export default function App() {
+  const [width, setWidth] = useState(0);
+  const [height, setHeight] = useState(0);
+
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
+
+  const prevWidthRef = useRef();
+  const prevHeightRef = useRef();
+  const prevWidth = prevWidthRef.current;
+  const prevHeight = prevHeightRef.current;
+
+
+  useEffect(() => {
+    console.log("useEffect!");
+    console.log('%c prevWH useEffect', 'background: #222; color: #bada55', {prevWidth, prevHeight, width, height});
+
+    prevWidthRef.current = width;
+    prevHeightRef.current = height;
+  });
 
   // Load facemesh model
   const runFacemesh = async () => {
@@ -44,16 +61,27 @@ export default function App() {
     ) {
       // Get Video properties
       const video = webcamRef.current.video;
-      const videoWidth = webcamRef.current.video.videoWidth;
-      const videoHeight = webcamRef.current.video.videoHeight;
+      const videoWidth = video.videoWidth;
+      const videoHeight = video.videoHeight;
 
       // Set Video Width
       webcamRef.current.video.width = videoWidth;
       webcamRef.current.video.height = videoHeight;
 
       // Set Canvas Width
-      canvasRef.current.width = videoWidth;
-      canvasRef.current.height = videoHeight;
+      if (prevWidth !== videoWidth && 
+          prevHeight !== videoHeight) {
+            setWidth(videoWidth);
+            setHeight(videoHeight);
+
+            console.log('%c detect prevWH useRef', 'background: #00FFFF; color: #0000ff', {prevWidth, prevHeight});
+
+            canvasRef.current.width = videoWidth;
+            canvasRef.current.height = videoHeight;
+            
+            console.log({prevWidth, prevHeight, width, height, videoWidth, videoHeight});
+            console.log("canvasRef setWidthHeight!");
+      }
 
       // Make Detections
       const face = await net.estimateFaces({input:video});
@@ -66,9 +94,6 @@ export default function App() {
   }
 
   useEffect(()=>{runFacemesh()}, []);
-
-  Love = ("what I do") => {      Constantly = (`learn` && `adjust`) => {      Bring.positive().solutions()       Strive.(for([Poetic + Computation]))  }
-
 
   return (  
     <div className="App">
