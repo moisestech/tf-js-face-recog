@@ -41,147 +41,147 @@ const camvasRef = useRef(null);
 // after useRef initializations in App () comp
 const runFacemesh = async () => {
   const net = await facemesh.load({
-    inputResolution: {width: 640, height: 480}, scale: 0.8
+    inputResolution: { width: 640, height: 480 },
+    scale: 0.8,
   });
-}
+};
 ```
 
 ## **6.** Detect function
 
-  **i.** async function **`detect`** runs when the app starts, goes ahead and detects our model and our webcam.
+**i.** async function **`detect`** runs when the app starts, goes ahead and detects our model and our webcam.
 
-  **ii.** **`if`** statement will check the **`webcamRef`** is defined with a **`readState`** of 4.
+**ii.** **`if`** statement will check the **`webcamRef`** is defined with a **`readState`** of 4.
 
-  **iii.** Once **`webcamRef`** is ready, the const **`video`**, **`videoWidth`**, and **`videoHeight`** are defined from **`webcamRef.current.video`**.
+**iii.** Once **`webcamRef`** is ready, the const **`video`**, **`videoWidth`**, and **`videoHeight`** are defined from **`webcamRef.current.video`**.
 
-  **iv.** Width const **`video, videoWidth, videoHeight`** the width and height of the **`webcamRef`** and **`canvasRef`** are set.
+**iv.** Width const **`video, videoWidth, videoHeight`** the width and height of the **`webcamRef`** and **`canvasRef`** are set.
 
-  **v.** async **`net.estimateFaces(video)`** is stored in **`face`** const which returns an **array** of **objects**.
+**v.** async **`net.estimateFaces(video)`** is stored in **`face`** const which returns an **array** of **objects**.
 
-  The returned objects include a **`scaledMesh`** for the face that returns an **`x, y, z`** coordinate for **3D Detection**.
+The returned objects include a **`scaledMesh`** for the face that returns an **`x, y, z`** coordinate for **3D Detection**.
 
-  ```javascript
-  // after runFacemesh async function
-  const detect = async (net) => {
-    // checking data is streaming
-    if (
-      typeof webcamRef.current !== "undefined" && 
-      webcamRef.current !== null && 
-      webcamRef.current.video.readyState === 4 
-    ) {
-      // Get Video properties
-      const video = webcamRef.current.video;
-      const videoWidth = webcamRef.current.video.videoWidth;
-      const videoHeight = webcamRef.current.video.videoHeight;
-      
-      // Set Video Width
-      webcamRef.current.video.width = videoWidth;
-      webcamRef.current.video.height = videoHeight;
+```javascript
+// after runFacemesh async function
+const detect = async (net) => {
+  // checking data is streaming
+  if (
+    typeof webcamRef.current !== "undefined" &&
+    webcamRef.current !== null &&
+    webcamRef.current.video.readyState === 4
+  ) {
+    // Get Video properties
+    const video = webcamRef.current.video;
+    const videoWidth = webcamRef.current.video.videoWidth;
+    const videoHeight = webcamRef.current.video.videoHeight;
 
-      // Set Canvas Width
-      canvasRef.current.width = videoWidth;
-      canvasRef.current.height = videoHeight;
+    // Set Video Width
+    webcamRef.current.video.width = videoWidth;
+    webcamRef.current.video.height = videoHeight;
 
-      // Make Detections
-      const face = await net.estimateFaces(video);
-      console.log(face);
+    // Set Canvas Width
+    canvasRef.current.width = videoWidth;
+    canvasRef.current.height = videoHeight;
 
-      // Get Canvas context for drawing
-    }
+    // Make Detections
+    const face = await net.estimateFaces(video);
+    console.log(face);
+
+    // Get Canvas context for drawing
   }
-  ```
+};
+```
 
 ## **8.** Setup Drawing Utility: Triangulation Data
 
-  i. Create a new file utilities JS **`utils/index.js`** and store the array of points from the mesh that create triangles.
+i. Create a new file utilities JS **`utils/index.js`** and store the array of points from the mesh that create triangles.
 
-  ```javascript
-  export const TRIANGULATION = [...];
-  ```
+```javascript
+export const TRIANGULATION = [...];
+```
 
 ## **9.** Setup Drawing Utility: **drawMesh()**
 
-  i. Arrow function **`drawMesh`** with parameters **`predictions, ctx`** will loop through the **model prediction** and draw them on the canvas.
+i. Arrow function **`drawMesh`** with parameters **`predictions, ctx`** will loop through the **model prediction** and draw them on the canvas.
 
-  ii. The **`predictions.scaledMesh`** keypoints are stored and used to draw in the canvas using **`ctx.arc`**.
+ii. The **`predictions.scaledMesh`** keypoints are stored and used to draw in the canvas using **`ctx.arc`**.
 
-  ```javascript
-  export const drawMesh = (predictions, ctx) => {
-    if (predictions.length > 0) {
+```javascript
+export const drawMesh = (predictions, ctx) => {
+  if (predictions.length > 0) {
+    // Draw Points
+    predictions.forEach((prediction) => {
+      const keypoints = prediction.scaledMesh;
+      for (let i = 0; i < keypoints.length; i++) {
+        const x = keypoints[i][0];
+        const y = keypoints[i][1];
 
-      // Draw Points
-      predictions.forEach(prediction => {
-        const keypoints = prediction.scaledMesh;
-        for (let i = 0; i < keypoints.length; i++) {
-          const x = keypoints[i][0];
-          const y = keypoints[i][1];
-
-          ctx.beginPath();
-          ctx.arc(x, y, 1, 0, 3 * Math.PI);
-          ctx.fillStyle = "aqua";
-          ctx.fill();
-        }
-      })
-    }
+        ctx.beginPath();
+        ctx.arc(x, y, 1, 0, 3 * Math.PI);
+        ctx.fillStyle = "aqua";
+        ctx.fill();
+      }
+    });
   }
-  ```
+};
+```
 
 ## **10.** Import Utility drawMesh to App
 
-  i. In **`src/App/index.js`** import the function **`drawMesh`** from **`utilities/index.js`**.
+i. In **`src/App/index.js`** import the function **`drawMesh`** from **`utilities/index.js`**.
 
-  ```javascript
-  // after import facemesh model
+```javascript
+// after import facemesh model
 
-  // drawings x, y points on canvas
-  import { drawMesh } from "../utils";
-  ```
+// drawings x, y points on canvas
+import { drawMesh } from "../utils";
+```
 
 ## **11.** Connect drawMesh function to model detect function
 
-  **ii.** Inside the detect function **`canvasRef`** is stored in const **`ctx`** and utils function **`drawMesh`** is invoked with **`face`** estimateFaces **object** and **`ctx`**.
+**ii.** Inside the detect function **`canvasRef`** is stored in const **`ctx`** and utils function **`drawMesh`** is invoked with **`face`** estimateFaces **object** and **`ctx`**.
 
-  ```javascript
-  // inside detect function make detections
+```javascript
+// inside detect function make detections
 
-  // Get canvas context for drawing
-  const ctx = canvasRef.current.getContext("2d");
-  drawMesh(face, ctx);
-  ```
+// Get canvas context for drawing
+const ctx = canvasRef.current.getContext("2d");
+drawMesh(face, ctx);
+```
 
 ## **12.** Setup Drawing Utility: **drawPath()**
 
-  **i.** In **utilities/index.js** the new function **`drawPath`** with parameters **`cts, points, closePath`**.
+**i.** In **utilities/index.js** the new function **`drawPath`** with parameters **`cts, points, closePath`**.
 
-  **ii.** The function initiates a new path, draws the points and then closes the path forming a entire triangle. After, **`strokeStyle`** is set and **`region`** is passed to **`ctx.stroke(region)`**.
+**ii.** The function initiates a new path, draws the points and then closes the path forming a entire triangle. After, **`strokeStyle`** is set and **`region`** is passed to **`ctx.stroke(region)`**.
 
-  ```javascript
-  const drawPath = (ctx, points, closePath) => {
-    const region = new Path2D();
-    region.moveTo(points[0][1]);
-    for (let i=1; i < points.length; i++) {
-      const point = points[i];
-      region.lineTo(point[0], point[1]);
-    }
-    if (closePath) {
-      region.closePath();
-    }
-    ctx.strokeStyle="cyan";
-    ctx.stoke(region);
+```javascript
+const drawPath = (ctx, points, closePath) => {
+  const region = new Path2D();
+  region.moveTo(points[0][1]);
+  for (let i = 1; i < points.length; i++) {
+    const point = points[i];
+    region.lineTo(point[0], point[1]);
   }
-  ```
+  if (closePath) {
+    region.closePath();
+  }
+  ctx.strokeStyle = "cyan";
+  ctx.stoke(region);
+};
+```
 
 ## **13.** Upgrade **drawMesh()** Utility with Draw Triangles
 
-  **i.** Passing through the TRIANGULATION metric dividing it by three and mapping it to specific points.
+**i.** Passing through the TRIANGULATION metric dividing it by three and mapping it to specific points.
 
-  **ii.** After, function **drawPath()** is invoked which requires the parameters **`ctx, points, true`**. The last param is require to show wether or not to show the path.
+**ii.** After, function **drawPath()** is invoked which requires the parameters **`ctx, points, true`**. The last param is require to show wether or not to show the path.
 
 ```javascript
 // inside the drawPath function
 
 // Draw triangles
-for (let i=0; i < TRIANGULATION.length/3; i++) {
+for (let i = 0; i < TRIANGULATION.length / 3; i++) {
   const points = [
     TRIANGULATION[i * 3],
     TRIANGULATION[i * 3 + 1],
@@ -216,16 +216,17 @@ for (let i=0; i < TRIANGULATION.length/3; i++) {
 
 ## WEBPACK HOW-TO
 
-- **Webpack**: Module bundler.
-- **webpack-cli**: is the interface we use to communicate with webpack.
-- **webpack-dev-server**: info coming soon.
+- [**Webpack**](https://www.npmjs.com/package/webpack): a module bundler. Its main purpose is to bundle JavaScript files for usage in a browser, yet it is also capable of transforming, bundling, or packaging just about any resource or asset.
+- [**webpack-cli**](https://www.npmjs.com/package/webpack-cli): is the interface we use to communicate with webpack. webpack CLI provides a set of tools to improve the setup of custom webpack configuration.
+- [**webpack-dev-server**](https://www.npmjs.com/package/webpack-dev-server): Use webpack with a development server that provides live reloading. This should be used for development only.
+  - It uses [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware) under the hood, which provides fast in-memory access to the webpack assets.
 
 ### Plugins
 
-- **CopyWebpackPlugin**: info coming soon.
-- **HtmlWebpackPlugin**: info coming soon.
-- **CleanWebpackPlugin**: info coming soon.
-- **UglifyPlugin**: info coming soon.
+- [**CopyWebpackPlugin**](https://www.npmjs.com/package/copy-webpack-plugin): Copies individual files or entire directories, which already exist, to the build directory.
+- [**HtmlWebpackPlugin**](https://www.npmjs.com/package/html-webpack-plugin): Plugin that simplifies creation of HTML files to serve your bundles.
+- [**CleanWebpackPlugin**](https://www.npmjs.com/package/clean-webpack-plugin): A webpack plugin to remove/clean your build folder(s).
+- [**UglifyPlugin**](https://www.npmjs.com/package/uglifyjs-webpack-plugin): This plugin uses [uglify-js](https://github.com/mishoo/UglifyJS) to minify your JavaScript.
 
 ---
 
